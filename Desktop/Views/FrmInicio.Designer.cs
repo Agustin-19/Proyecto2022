@@ -38,12 +38,6 @@
             this.BtnCrearVenta = new FontAwesome.Sharp.IconButton();
             this.BtnAgregar = new FontAwesome.Sharp.IconButton();
             this.GridVentas = new System.Windows.Forms.DataGridView();
-            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label10 = new System.Windows.Forms.Label();
             this.TxtTotal = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -79,6 +73,12 @@
             this.gridProductos = new System.Windows.Forms.DataGridView();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -228,46 +228,6 @@
             this.GridVentas.RowTemplate.Height = 25;
             this.GridVentas.Size = new System.Drawing.Size(489, 155);
             this.GridVentas.TabIndex = 40;
-            // 
-            // IdProducto
-            // 
-            this.IdProducto.HeaderText = "IdProducto";
-            this.IdProducto.Name = "IdProducto";
-            this.IdProducto.ReadOnly = true;
-            this.IdProducto.Visible = false;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // PrecioVenta
-            // 
-            this.PrecioVenta.HeaderText = "Precio";
-            this.PrecioVenta.Name = "PrecioVenta";
-            this.PrecioVenta.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 70;
-            // 
-            // SubTotal
-            // 
-            this.SubTotal.HeaderText = "SubTotal";
-            this.SubTotal.Name = "SubTotal";
-            this.SubTotal.ReadOnly = true;
-            // 
-            // elimina
-            // 
-            this.elimina.HeaderText = "";
-            this.elimina.Name = "elimina";
-            this.elimina.ReadOnly = true;
-            this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.elimina.Width = 30;
             // 
             // label10
             // 
@@ -681,6 +641,49 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ventas";
             // 
+            // IdProducto
+            // 
+            this.IdProducto.HeaderText = "IdProducto";
+            this.IdProducto.Name = "IdProducto";
+            this.IdProducto.ReadOnly = true;
+            this.IdProducto.Visible = false;
+            this.IdProducto.Width = 50;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // PrecioVenta
+            // 
+            this.PrecioVenta.HeaderText = "Precio";
+            this.PrecioVenta.Name = "PrecioVenta";
+            this.PrecioVenta.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 70;
+            // 
+            // SubTotal
+            // 
+            this.SubTotal.HeaderText = "SubTotal";
+            this.SubTotal.Name = "SubTotal";
+            this.SubTotal.ReadOnly = true;
+            // 
+            // elimina
+            // 
+            this.elimina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.elimina.HeaderText = "";
+            this.elimina.Name = "elimina";
+            this.elimina.ReadOnly = true;
+            this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.elimina.Text = "X";
+            this.elimina.Width = 30;
+            // 
             // FrmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -725,12 +728,6 @@
         private DataGridView gridProductos;
         private TextBox txtBusqueda;
         private DataGridView GridVentas;
-        private DataGridViewTextBoxColumn IdProducto;
-        private DataGridViewTextBoxColumn Producto;
-        private DataGridViewTextBoxColumn PrecioVenta;
-        private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewTextBoxColumn SubTotal;
-        private DataGridViewButtonColumn elimina;
         private Label label10;
         private TextBox TxtTotal;
         private Label label9;
@@ -762,5 +759,11 @@
         private FontAwesome.Sharp.IconButton BtnAgregar;
         private FontAwesome.Sharp.IconButton BtnEscribir;
         private FontAwesome.Sharp.IconButton BtnCrearVenta;
+        private DataGridViewTextBoxColumn IdProducto;
+        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn PrecioVenta;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn SubTotal;
+        private DataGridViewButtonColumn elimina;
     }
 }

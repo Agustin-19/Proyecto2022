@@ -18,26 +18,29 @@ namespace Desktop.Views
     {
         IUnitOfWork unitOfWork = new UnitOfWork();
         BindingSource listaProductos = new BindingSource();
+        BindingSource listaVentas = new BindingSource();
         public FrmInicio()
         {
             InitializeComponent();
-            //GetAllProducto();
+            GetAll();
             gridProductos.DataSource = listaProductos;
+            GridVenta1.DataSource = listaVentas;
         }
 
-        private async void GetAllProducto()
+        private async void GetAll()
         {
             listaProductos.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+            listaVentas.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
         }
 
-        private async void GetAllProducto(string txtBusqueda)
+        private async void GetAll(string txtBusqueda)
         {
             listaProductos.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(filter: c => c.Nombre.Contains(txtBusqueda), orderBy: c => c.OrderBy(c => c.Nombre));
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            GetAllProducto(txtBusqueda.Text);
+            GetAll(txtBusqueda.Text);
         }
 
         private void FrmInicio_Load(object sender, EventArgs e)
@@ -215,7 +218,7 @@ namespace Desktop.Views
             }
         }
 
-        private void BtnCrearVenta_Click(object sender, EventArgs e)
+        private async void BtnCrearVenta_Click(object sender, EventArgs e)
         {
             // asegurar que se ingrese un cliente. Por defecto esta Seleccionado "consumidor final" 
             if (TxtNombre.Text == "")
@@ -231,6 +234,83 @@ namespace Desktop.Views
                 MessageBox.Show("Debe ingresar un Producto para continuar", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
+            calcularCambio();
+
+            //Guardar datos de la venta...
+            GuardarVenta();
+        
+            
+
+            //optengo el Ultimo Id generado en la tabla "Ventas"
+            //para luego utilizarlo en la tabla "DetalleDeVentas"
+
+            int OptnerIDVenta = GridVenta1.RowCount + 1;
+            GetAll();
+
+            //el foreach recorre el DataGridView para optener los datos de los productos.
+            foreach (DataGridViewRow row in GridVentas.Rows)
+            {
+                // se guardan los datos optenidos en la tabla "VentaDetalle"
+                VentaDetalle ventaDetalle = new VentaDetalle()
+                {
+                    IdVenta = OptnerIDVenta,
+                    IdProducto = Convert.ToInt32(row.Cells["IdProducto"].Value),
+                    Producto = Convert.ToString(row.Cells["Producto"].Value),
+                    PrecioVenta = Convert.ToDecimal(row.Cells["PrecioVenta"].Value),
+                    Cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value),
+                    SubTotal = Convert.ToDecimal(row.Cells["SubTotal"].Value),
+                    //datos extras utilizados en los reportes.
+                    DNICliente = Convert.ToInt32(NudDNI.Value),
+                    NombreCliente = TxtNombre.Text,
+                    MontoPago = Convert.ToDecimal(TxtPaga.Text),
+                    MontoTotal = Convert.ToDecimal(TxtTotal.Text),
+                    MontoCambio = Convert.ToDecimal(TxtCambio.Text),
+                    FechaRegistro = Convert.ToDateTime(TxtFecha.Text),
+                    
+                }; 
+                unitOfWork.VentaDetalleRepository.Add(ventaDetalle);
+
+                unitOfWork.Save();
+
+                //limpiamos la pantalla 
+                LimpiarCliente();
+
+                GridVentas.Rows.Clear();
+
+                GridVentas.Refresh();
+
+                //if (OptnerIDVenta > 0)
+                //{
+                //    var result = MessageBox.Show("¿Desea imprimir comproante? ", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                //    if (result == DialogResult.Yes)
+                //    {
+                //        FrmVerVentas frmVerVentas = new FrmVerVentas();
+                //        frmVerVentas.ShowDialog();
+                //    }
+                //}
+                //MessageBox.Show("Venta Completada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
+        }
+
+       
+
+        private async void GuardarVenta()
+        {
+            Venta venta = new Venta()
+            {
+                IdCliente = Convert.ToInt32(TxtIdCliente.Text),
+                DNICliente = Convert.ToInt32(NudDNI.Value),
+                NombreCliente = TxtNombre.Text,
+                MontoPago = Convert.ToDecimal(TxtPaga.Text),
+                MontoTotal = Convert.ToDecimal(TxtTotal.Text),
+                MontoCambio = Convert.ToDecimal(TxtCambio.Text),
+                FechaRegistro = TxtFecha.Text,
+            };
+            unitOfWork.VentaRepository.Add(venta);
+            
+            unitOfWork.Save();
         }
 
         private void BtnBuscarCliente_Click(object sender, EventArgs e)

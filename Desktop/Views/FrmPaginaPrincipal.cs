@@ -1,4 +1,6 @@
-﻿using FontAwesome.Sharp;
+﻿using Data.Interfaces;
+using Data.Repositories;
+using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +17,28 @@ namespace Desktop.Views
     {
         public static Form FormularioActivo = null;
         public static IconMenuItem MenuActivo = null;
-
+        IUnitOfWork unitOfWork = new UnitOfWork();
+        BindingSource listaProductos = new BindingSource();
+        BindingSource listaClientes = new BindingSource();
+        BindingSource listaVentas = new BindingSource();
+        BindingSource listaVentaDetalles = new BindingSource();
 
         public FrmPaginaPrincipal()
         {
             InitializeComponent();
+            GetAll();
         }
+
+        private async void GetAll()
+        {
+            listaProductos.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+            listaClientes.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+            listaVentas.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+            listaVentaDetalles.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+
+        }
+
+
 
         private void AbrirFormulario(IconMenuItem menu, Form formulario)
         {
