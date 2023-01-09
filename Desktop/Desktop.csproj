@@ -9,11 +9,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Paquetes\Microsoft.ReportViewer.Common.dll" />
+    <None Remove="Paquetes\Microsoft.ReportViewer.WinForms.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.2.1" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.17" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Proyecto2022\Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common">
+      <HintPath>..\Paquetes\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms">
+      <HintPath>..\Paquetes\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Paquetes\Microsoft.ReportViewer.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Paquetes\Microsoft.ReportViewer.WinForms.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

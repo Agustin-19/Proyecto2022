@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TabClientes = new System.Windows.Forms.TabControl();
             this.TabEditarClientes = new System.Windows.Forms.TabPage();
@@ -51,12 +56,12 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TabListadoCliente = new System.Windows.Forms.TabPage();
+            this.gridClientes = new System.Windows.Forms.DataGridView();
             this.BtnEliminar = new FontAwesome.Sharp.IconButton();
             this.BtnEditar = new FontAwesome.Sharp.IconButton();
             this.BtnBuscar = new FontAwesome.Sharp.IconButton();
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.gridClientes = new System.Windows.Forms.DataGridView();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.TabClientes.SuspendLayout();
@@ -324,12 +329,12 @@
             // TabListadoCliente
             // 
             this.TabListadoCliente.BackColor = System.Drawing.Color.DarkGray;
+            this.TabListadoCliente.Controls.Add(this.gridClientes);
             this.TabListadoCliente.Controls.Add(this.BtnEliminar);
             this.TabListadoCliente.Controls.Add(this.BtnEditar);
             this.TabListadoCliente.Controls.Add(this.BtnBuscar);
             this.TabListadoCliente.Controls.Add(this.label6);
             this.TabListadoCliente.Controls.Add(this.label11);
-            this.TabListadoCliente.Controls.Add(this.gridClientes);
             this.TabListadoCliente.Controls.Add(this.txtBusqueda);
             this.TabListadoCliente.Location = new System.Drawing.Point(4, 26);
             this.TabListadoCliente.Name = "TabListadoCliente";
@@ -337,6 +342,72 @@
             this.TabListadoCliente.Size = new System.Drawing.Size(753, 322);
             this.TabListadoCliente.TabIndex = 0;
             this.TabListadoCliente.Text = "Listado Clientes";
+            // 
+            // gridClientes
+            // 
+            this.gridClientes.AllowUserToAddRows = false;
+            this.gridClientes.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkOrange;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.gridClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridClientes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.gridClientes.BackgroundColor = System.Drawing.Color.DarkGray;
+            this.gridClientes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gridClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
+            this.gridClientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkTurquoise;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.gridClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridClientes.DefaultCellStyle = dataGridViewCellStyle3;
+            this.gridClientes.EnableHeadersVisualStyles = false;
+            this.gridClientes.GridColor = System.Drawing.Color.Black;
+            this.gridClientes.Location = new System.Drawing.Point(13, 100);
+            this.gridClientes.MinimumSize = new System.Drawing.Size(708, 216);
+            this.gridClientes.Name = "gridClientes";
+            this.gridClientes.ReadOnly = true;
+            this.gridClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gridClientes.RowHeadersVisible = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DarkOrange;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.gridClientes.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.gridClientes.RowTemplate.Height = 25;
+            this.gridClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridClientes.Size = new System.Drawing.Size(708, 216);
+            this.gridClientes.TabIndex = 48;
+            this.gridClientes.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridClientes_DataBindingComplete_1);
             // 
             // BtnEliminar
             // 
@@ -416,25 +487,6 @@
             this.label11.TabIndex = 39;
             this.label11.Text = "Buscar Cliente:";
             // 
-            // gridClientes
-            // 
-            this.gridClientes.AllowUserToAddRows = false;
-            this.gridClientes.AllowUserToDeleteRows = false;
-            this.gridClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridClientes.Location = new System.Drawing.Point(11, 98);
-            this.gridClientes.Name = "gridClientes";
-            this.gridClientes.ReadOnly = true;
-            this.gridClientes.RowHeadersVisible = false;
-            this.gridClientes.RowTemplate.Height = 25;
-            this.gridClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridClientes.Size = new System.Drawing.Size(710, 218);
-            this.gridClientes.TabIndex = 38;
-            this.gridClientes.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridClientes_DataBindingComplete);
-            // 
             // txtBusqueda
             // 
             this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -494,7 +546,7 @@
         private FontAwesome.Sharp.IconButton BtnBuscar;
         private Label label6;
         private Label label11;
-        private DataGridView gridClientes;
         private TextBox txtBusqueda;
+        private DataGridView gridClientes;
     }
 }

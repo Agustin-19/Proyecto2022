@@ -38,21 +38,17 @@ namespace Desktop.Views
         private async void GetAllClientes()
         {
             listaClientes.DataSource = await unitOfWork.ClienteRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+            listaLocalidades.DataSource = await unitOfWork.LocalidadRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.NombreLocalidad));
+
+            comboBoxLocalidades.DataSource = listaLocalidades;
+            comboBoxLocalidades.DisplayMember = "NombreLocalidad";
+            comboBoxLocalidades.ValueMember = "Id";
         }
         private async void GetAllClientes(string txtBusqueda)
         {
             listaClientes.DataSource = await unitOfWork.ClienteRepository.GetAllAsync(filter: c => c.Nombre.Contains(txtBusqueda), orderBy: c => c.OrderBy(c => c.Nombre));
         }
-        private async void CargarComboLocalidades()
-        {
-            //listaLocalidades.DataSource = await unitOfWork.LocalidadRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.NombreLocalidad));
-
-            //comboBoxLocalidades.DataSource = listaLocalidades;
-            //comboBoxLocalidades.DisplayMember = "NombreLocalidad";
-            //comboBoxLocalidades.ValueMember = "Id";
-
-        }
-
+        
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarImputs();
@@ -95,21 +91,6 @@ namespace Desktop.Views
             unitOfWork.Save();
             GetAllClientes();
             LimpiarImputs();
-        }
-
-        private void gridClientes_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewColumn columna in gridClientes.Columns)
-            {
-                if (columna.Name == "NombreCompleto")
-                    columna.Visible = false;
-                if (columna.Name == "LocalidadId")
-                    columna.Visible = false;
-                if (columna.Name == "Localidad")
-                    columna.Visible = false;
-                //if (columna.Name == "Id")
-                //    columna.Width = 30;
-            }
         }
 
         private void TxtNombre_TextChanged(object sender, EventArgs e)
@@ -157,6 +138,21 @@ namespace Desktop.Views
                 unitOfWork.ClienteRepository.Delete(cliente.Id);
                 unitOfWork.Save();
                 GetAllClientes();
+            }
+        }
+
+        private void gridClientes_DataBindingComplete_1(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn columna in gridClientes.Columns)
+            {
+                if (columna.Name == "NombreCompleto")
+                    columna.Visible = false;
+                if (columna.Name == "LocalidadId")
+                    columna.Visible = false;
+                if (columna.Name == "Localidad")
+                    columna.Visible = false;
+                //if (columna.Name == "Id")
+                //    columna.Width = 30;
             }
         }
     }

@@ -50,17 +50,6 @@ namespace Desktop.Views
             TxtDetalle.Text = "";
         }
 
-        private void gridProductos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewColumn columna in gridProductos.Columns)
-            {
-                if (columna.Name == "Nombre")
-                    columna.HeaderText = "Producto";
-                if (columna.Name == "Id")
-                    columna.Width = 40;
-            }
-        }
-
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             IrAPestañaEditar();
@@ -152,6 +141,17 @@ namespace Desktop.Views
         private void btnBuscar_Click_1(object sender, EventArgs e)
         {
             GetAll(txtBusqueda.Text);
+        }
+
+        private void gridProductos_DataBindingComplete_1(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn columna in gridProductos.Columns)
+            {
+                if (columna.Name == "Nombre")
+                    columna.HeaderText = "Producto";
+                if (columna.Name == "Id")
+                    columna.Width = 40;
+            }
         }
     }
 }

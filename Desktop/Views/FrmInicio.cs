@@ -19,28 +19,40 @@ namespace Desktop.Views
         IUnitOfWork unitOfWork = new UnitOfWork();
         BindingSource listaProductos = new BindingSource();
         BindingSource listaVentas = new BindingSource();
+        BindingSource listaVentaDetalles = new BindingSource();
+        string ventaSeleccionada = "";
+        string fechaVenta = "";
+        int idVentaSeleccionada = 0;
         public FrmInicio()
         {
             InitializeComponent();
             GetAll();
-            gridProductos.DataSource = listaProductos;
-            GridVenta1.DataSource = listaVentas;
+            
+           
         }
 
-        private async void GetAll()
+        private async Task GetAll()
         {
             listaProductos.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
-            listaVentas.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
+            gridProductos.DataSource = listaProductos;
+
+
+            listaVentas.DataSource = await unitOfWork.VentaRepository.GetAllAsync(orderBy: c => c.OrderByDescending(c => c.Id));
+            GridVenta1.DataSource = listaVentas;
+            GridVenta2.DataSource = listaVentas;
+
+
+            
         }
 
-        private async void GetAll(string txtBusqueda)
+        private async Task GetAll(string txtBusqueda)
         {
             listaProductos.DataSource = await unitOfWork.ProductoRepository.GetAllAsync(filter: c => c.Nombre.Contains(txtBusqueda), orderBy: c => c.OrderBy(c => c.Nombre));
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private async void btnBuscar_Click(object sender, EventArgs e)
         {
-            GetAll(txtBusqueda.Text);
+           await GetAll(txtBusqueda.Text);
         }
 
         private void FrmInicio_Load(object sender, EventArgs e)
@@ -238,15 +250,23 @@ namespace Desktop.Views
             calcularCambio();
 
             //Guardar datos de la venta...
-            GuardarVenta();
+            await GuardarVenta();
         
             
 
             //optengo el Ultimo Id generado en la tabla "Ventas"
             //para luego utilizarlo en la tabla "DetalleDeVentas"
 
+           
+
+            await GuardarVentaDetalles();
+           
+        }
+
+        private async Task GuardarVentaDetalles()
+        {
             int OptnerIDVenta = GridVenta1.RowCount + 1;
-            GetAll();
+            await GetAll();
 
             //el foreach recorre el DataGridView para optener los datos de los productos.
             foreach (DataGridViewRow row in GridVentas.Rows)
@@ -267,13 +287,12 @@ namespace Desktop.Views
                     MontoTotal = Convert.ToDecimal(TxtTotal.Text),
                     MontoCambio = Convert.ToDecimal(TxtCambio.Text),
                     FechaRegistro = Convert.ToDateTime(TxtFecha.Text),
-                    
-                }; 
+
+                };
                 unitOfWork.VentaDetalleRepository.Add(ventaDetalle);
 
                 unitOfWork.Save();
 
-                //limpiamos la pantalla 
                 LimpiarCliente();
 
                 GridVentas.Rows.Clear();
@@ -294,14 +313,15 @@ namespace Desktop.Views
             }
         }
 
-       
-
-        private async void GuardarVenta()
+        private async Task GuardarVenta()
         {
+            int OptnerIDVenta = GridVenta1.RowCount + 1;
+
             Venta venta = new Venta()
             {
                 IdCliente = Convert.ToInt32(TxtIdCliente.Text),
                 DNICliente = Convert.ToInt32(NudDNI.Value),
+                NumeroVenta = OptnerIDVenta.ToString(),
                 NombreCliente = TxtNombre.Text,
                 MontoPago = Convert.ToDecimal(TxtPaga.Text),
                 MontoTotal = Convert.ToDecimal(TxtTotal.Text),
@@ -330,6 +350,75 @@ namespace Desktop.Views
                 {
                     TxtNombre.Select();
                 }
+            }
+        }
+
+       
+        // terminados los procesos de TabInicio...
+
+        // Incio de procesos de TabVentas
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GridVenta2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn columna in GridVenta2.Columns)
+            {
+                if (columna.Name == "IdCliente")
+                    columna.Visible = false;
+                if (columna.Name == "NumeroVenta")
+                    columna.Visible = false ;
+                if (columna.Name == "Id")
+                    columna.HeaderText = "Venta N°";
+
+            }
+        }
+
+        private void GridVentas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+            if (e.ColumnIndex == 5)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                var w = Properties.Resources.eliminarUno.Width;
+                var h = Properties.Resources.eliminarUno.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(Properties.Resources.eliminarUno, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
+
+        private void GridVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (GridVentas.Columns[e.ColumnIndex].Name == "elimina")
+            {
+                int index = e.RowIndex;
+                if (index >= 0)
+                {
+                    GridVentas.Rows.RemoveAt(index);
+                    CalcularTotal();
+                }
+            }
+        }
+
+
+        private async void GridVenta2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (GridVenta2.Rows.Count > 0)
+            {
+                idVentaSeleccionada = (int)GridVenta2.CurrentRow.Cells[0].Value;
+                ventaSeleccionada = (string)GridVenta2.CurrentRow.Cells[3].Value;
+                fechaVenta = (string)GridVenta2.CurrentRow.Cells[8].Value;
+                LblDetalle.Text = $"Detalles de venta N°: "+idVentaSeleccionada+" del cliente " +ventaSeleccionada+" el dia "+fechaVenta;
+
+                listaVentaDetalles.DataSource = await unitOfWork.VentaDetalleRepository.GetAllAsync(c => c.IdVenta == idVentaSeleccionada);
+                GridVentaDetalle.DataSource = listaVentaDetalles;
             }
         }
     }

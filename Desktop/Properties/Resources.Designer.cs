@@ -63,6 +63,16 @@ namespace Desktop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap eliminarUno {
+            get {
+                object obj = ResourceManager.GetObject("eliminarUno", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Fotocopiadora {
             get {
                 object obj = ResourceManager.GetObject("Fotocopiadora", resourceCulture);
