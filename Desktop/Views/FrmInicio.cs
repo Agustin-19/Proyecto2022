@@ -251,20 +251,14 @@ namespace Desktop.Views
 
             //Guardar datos de la venta...
             await GuardarVenta();
-        
-            
+
+
 
             //optengo el Ultimo Id generado en la tabla "Ventas"
             //para luego utilizarlo en la tabla "DetalleDeVentas"
 
-           
 
-            await GuardarVentaDetalles();
-           
-        }
 
-        private async Task GuardarVentaDetalles()
-        {
             int OptnerIDVenta = GridVenta1.RowCount + 1;
             await GetAll();
 
@@ -272,26 +266,27 @@ namespace Desktop.Views
             foreach (DataGridViewRow row in GridVentas.Rows)
             {
                 // se guardan los datos optenidos en la tabla "VentaDetalle"
-                VentaDetalle ventaDetalle = new VentaDetalle()
-                {
-                    IdVenta = OptnerIDVenta,
-                    IdProducto = Convert.ToInt32(row.Cells["IdProducto"].Value),
-                    Producto = Convert.ToString(row.Cells["Producto"].Value),
-                    PrecioVenta = Convert.ToDecimal(row.Cells["PrecioVenta"].Value),
-                    Cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value),
-                    SubTotal = Convert.ToDecimal(row.Cells["SubTotal"].Value),
-                    //datos extras utilizados en los reportes.
-                    DNICliente = Convert.ToInt32(NudDNI.Value),
-                    NombreCliente = TxtNombre.Text,
-                    MontoPago = Convert.ToDecimal(TxtPaga.Text),
-                    MontoTotal = Convert.ToDecimal(TxtTotal.Text),
-                    MontoCambio = Convert.ToDecimal(TxtCambio.Text),
-                    FechaRegistro = Convert.ToDateTime(TxtFecha.Text),
+                VentaDetalle ventaDetalle = new VentaDetalle();
 
-                };
+                ventaDetalle.IdVenta = OptnerIDVenta;
+                ventaDetalle.IdProducto = Convert.ToInt32(row.Cells["IdProducto"].Value);
+                ventaDetalle.Producto = Convert.ToString(row.Cells["Producto"].Value);
+                ventaDetalle.PrecioVenta = Convert.ToDecimal(row.Cells["PrecioVenta"].Value);
+                ventaDetalle.Cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                ventaDetalle.SubTotal = Convert.ToDecimal(row.Cells["SubTotal"].Value);
+                //datos extras utilizados en los reportes.
+                ventaDetalle.DNICliente = Convert.ToInt32(NudDNI.Value);
+                ventaDetalle.NombreCliente = TxtNombre.Text;
+                ventaDetalle.MontoPago = Convert.ToDecimal(TxtPaga.Text);
+                ventaDetalle.MontoTotal = Convert.ToDecimal(TxtTotal.Text);
+                ventaDetalle.MontoCambio = Convert.ToDecimal(TxtCambio.Text);
+                ventaDetalle.FechaRegistro = TxtFecha.Text;
+
                 unitOfWork.VentaDetalleRepository.Add(ventaDetalle);
 
                 unitOfWork.Save();
+
+            }       
 
                 LimpiarCliente();
 
@@ -310,8 +305,10 @@ namespace Desktop.Views
                 //}
                 //MessageBox.Show("Venta Completada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            }
+            
+
         }
+
 
         private async Task GuardarVenta()
         {
@@ -372,6 +369,18 @@ namespace Desktop.Views
                     columna.Visible = false ;
                 if (columna.Name == "Id")
                     columna.HeaderText = "Venta N°";
+                if (columna.Name == "NombreCliente")
+                    columna.HeaderText = "Cliente";
+                 if (columna.Name == "DNICliente")
+                    columna.HeaderText = "DNI";
+                 if (columna.Name == "MontoPago")
+                    columna.HeaderText = "Pago con $";
+                 if (columna.Name == "MontoCambio")
+                    columna.HeaderText = "Cambio $";
+                 if (columna.Name == "MontoTotal")
+                    columna.HeaderText = "Total $";
+                 if (columna.Name == "FechaRegistro")
+                    columna.HeaderText = "Fecha";
 
             }
         }
@@ -419,6 +428,36 @@ namespace Desktop.Views
 
                 listaVentaDetalles.DataSource = await unitOfWork.VentaDetalleRepository.GetAllAsync(c => c.IdVenta == idVentaSeleccionada);
                 GridVentaDetalle.DataSource = listaVentaDetalles;
+            }
+        }
+
+        private void GridVentaDetalle_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn columna in GridVentaDetalle.Columns)
+            {
+                if (columna.Name == "IdProducto")
+                    columna.Visible = false;
+                if (columna.Name == "IdVenta")
+                    columna.Visible = false;
+                if (columna.Name == "NombreCliente")
+                    columna.Visible = false;
+                if (columna.Name == "MontoPago")
+                    columna.Visible = false;
+                if (columna.Name == "MontoCambio")
+                    columna.Visible = false;
+                if (columna.Name == "MontoTotal")
+                    columna.Visible = false;
+                if (columna.Name == "Id")
+                    columna.Visible = false;
+                if (columna.Name == "DNICliente")
+                    columna.Visible = false;
+                if (columna.Name == "PrecioVenta")
+                    columna.HeaderText = "Precio $";
+                if (columna.Name == "SubTotal")
+                    columna.HeaderText = "Total $";
+                if (columna.Name == "FechaRegistro")
+                    columna.HeaderText = "Fecha";
+
             }
         }
     }

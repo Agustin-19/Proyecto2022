@@ -17,9 +17,9 @@ namespace Data.Models
         public string? NombreCliente { get; set; }
         [Required]
         public int DNICliente { get; set; }
+        public decimal MontoTotal { get; set; }
         public decimal MontoPago { get; set; }
         public decimal MontoCambio { get; set; }
-        public decimal MontoTotal { get; set; }
         public string? FechaRegistro { get; set; }
     }
 }
