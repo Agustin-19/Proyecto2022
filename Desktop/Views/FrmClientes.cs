@@ -23,19 +23,14 @@ namespace Desktop.Views
         public FrmClientes()
         {
             InitializeComponent();
-            this.unitOfWork = unitOfWork;
+            unitOfWork = unitOfWork;
             //CargarComboLocalidades();
             
-            GetAllClientes();
+            GetAll();
             gridClientes.DataSource = listaClientes;
-
-
-            
         }
 
-
-
-        private async void GetAllClientes()
+        private async void GetAll()
         {
             listaClientes.DataSource = await unitOfWork.ClienteRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.Nombre));
             listaLocalidades.DataSource = await unitOfWork.LocalidadRepository.GetAllAsync(orderBy: c => c.OrderBy(c => c.NombreLocalidad));
@@ -44,17 +39,10 @@ namespace Desktop.Views
             comboBoxLocalidades.DisplayMember = "NombreLocalidad";
             comboBoxLocalidades.ValueMember = "Id";
         }
-        private async void GetAllClientes(string txtBusqueda)
+        private async void GetAll(string txtBusqueda)
         {
             listaClientes.DataSource = await unitOfWork.ClienteRepository.GetAllAsync(filter: c => c.Nombre.Contains(txtBusqueda), orderBy: c => c.OrderBy(c => c.Nombre));
         }
-        
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LimpiarImputs();
-            Close();
-        }
-
         private void LimpiarImputs()
         {
             TxtNombre.Text = "";
@@ -65,50 +53,6 @@ namespace Desktop.Views
             TxtTelefono.Text = string.Empty;
             comboBoxLocalidades.SelectedValue = 1;
         }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            Cliente cliente = new Cliente()
-            {
-                Id = (int)nudId.Value,
-                Nombre = TxtNombre.Text,
-                Apellido = TxtApellido.Text,
-                DNI = Convert.ToInt32(TxtDni.Text),
-                Email = TxtEmail.Text,
-                Telefono = TxtTelefono.Text,
-                Dirección = TxtDireccion.Text,
-                //LocalidadId = (int)comboBoxLocalidades.SelectedValue,
-                //Localidad = comboBoxLocalidades.Text,
-
-
-            };
-            if (editando)
-                unitOfWork.ClienteRepository.Update(cliente);
-            else
-                unitOfWork.ClienteRepository.Add(cliente);
-
-
-            unitOfWork.Save();
-            GetAllClientes();
-            LimpiarImputs();
-        }
-
-        private void TxtNombre_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void BtnBuscar_Click(object sender, EventArgs e)
-        {
-            GetAllClientes(txtBusqueda.Text);
-        }
-
-        private void TxtEditar_Click(object sender, EventArgs e)
-        {
-            RecuperarParaEditar();
-            IrAPestañaEditar();
-            editando = true;
-        }
-
         private void IrAPestañaEditar()
         {
             //cambiar de pestaña
@@ -129,6 +73,49 @@ namespace Desktop.Views
             TxtDireccion.Text = cliente.Dirección;
         }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarImputs();
+            Close();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = new Cliente()
+            {
+                Id = (int)nudId.Value,
+                Nombre = TxtNombre.Text,
+                Apellido = TxtApellido.Text,
+                DNI = Convert.ToInt32(TxtDni.Text),
+                Email = TxtEmail.Text,
+                Telefono = TxtTelefono.Text,
+                Dirección = TxtDireccion.Text,
+                LocalidadId = (int)comboBoxLocalidades.SelectedValue,
+                Localidad = comboBoxLocalidades.Text,
+            };
+            if (editando)
+                unitOfWork.ClienteRepository.Update(cliente);
+            else
+                unitOfWork.ClienteRepository.Add(cliente);
+
+
+            unitOfWork.Save();
+            GetAll();
+            LimpiarImputs();
+        }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            GetAll(txtBusqueda.Text);
+        }
+
+        private void BtnEditar_Click(object sender, EventArgs e)
+        {
+            RecuperarParaEditar();
+            IrAPestañaEditar();
+            editando = true;
+        }
+               
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
             var cliente = (Cliente)listaClientes.Current;
@@ -137,7 +124,7 @@ namespace Desktop.Views
             {
                 unitOfWork.ClienteRepository.Delete(cliente.Id);
                 unitOfWork.Save();
-                GetAllClientes();
+                GetAll();
             }
         }
 
@@ -149,11 +136,13 @@ namespace Desktop.Views
                     columna.Visible = false;
                 if (columna.Name == "LocalidadId")
                     columna.Visible = false;
-                if (columna.Name == "Localidad")
-                    columna.Visible = false;
-                //if (columna.Name == "Id")
-                //    columna.Width = 30;
             }
+        }
+
+        private void BtnAgregar_Click(object sender, EventArgs e)
+        {
+            FrmLocalidad frmLocalidad = new FrmLocalidad();
+            frmLocalidad.ShowDialog();
         }
     }
 }

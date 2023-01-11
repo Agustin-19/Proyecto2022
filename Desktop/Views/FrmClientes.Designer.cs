@@ -36,6 +36,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.TabClientes = new System.Windows.Forms.TabControl();
             this.TabEditarClientes = new System.Windows.Forms.TabPage();
+            this.BtnAgregar = new FontAwesome.Sharp.IconButton();
             this.TxtEmail = new System.Windows.Forms.TextBox();
             this.TxtDireccion = new System.Windows.Forms.TextBox();
             this.comboBoxLocalidades = new System.Windows.Forms.ComboBox();
@@ -100,6 +101,7 @@
             // TabEditarClientes
             // 
             this.TabEditarClientes.BackColor = System.Drawing.Color.DarkGray;
+            this.TabEditarClientes.Controls.Add(this.BtnAgregar);
             this.TabEditarClientes.Controls.Add(this.TxtEmail);
             this.TabEditarClientes.Controls.Add(this.TxtDireccion);
             this.TabEditarClientes.Controls.Add(this.comboBoxLocalidades);
@@ -127,6 +129,24 @@
             this.TabEditarClientes.TabIndex = 1;
             this.TabEditarClientes.Text = "Agregar Cliente";
             // 
+            // BtnAgregar
+            // 
+            this.BtnAgregar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAgregar.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BtnAgregar.ForeColor = System.Drawing.Color.SpringGreen;
+            this.BtnAgregar.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.BtnAgregar.IconColor = System.Drawing.Color.SpringGreen;
+            this.BtnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BtnAgregar.IconSize = 30;
+            this.BtnAgregar.Location = new System.Drawing.Point(702, 170);
+            this.BtnAgregar.Name = "BtnAgregar";
+            this.BtnAgregar.Size = new System.Drawing.Size(34, 30);
+            this.BtnAgregar.TabIndex = 72;
+            this.BtnAgregar.UseVisualStyleBackColor = false;
+            this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
+            // 
             // TxtEmail
             // 
             this.TxtEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -149,7 +169,7 @@
             this.comboBoxLocalidades.FormattingEnabled = true;
             this.comboBoxLocalidades.Location = new System.Drawing.Point(567, 175);
             this.comboBoxLocalidades.Name = "comboBoxLocalidades";
-            this.comboBoxLocalidades.Size = new System.Drawing.Size(169, 25);
+            this.comboBoxLocalidades.Size = new System.Drawing.Size(128, 25);
             this.comboBoxLocalidades.TabIndex = 7;
             // 
             // label10
@@ -314,7 +334,6 @@
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(222, 25);
             this.TxtNombre.TabIndex = 1;
-            this.TxtNombre.TextChanged += new System.EventHandler(this.TxtNombre_TextChanged);
             // 
             // label1
             // 
@@ -447,7 +466,7 @@
             this.BtnEditar.Text = "Editar";
             this.BtnEditar.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.BtnEditar.UseVisualStyleBackColor = false;
-            this.BtnEditar.Click += new System.EventHandler(this.TxtEditar_Click);
+            this.BtnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
             // BtnBuscar
             // 
@@ -548,5 +567,6 @@
         private Label label11;
         private TextBox txtBusqueda;
         private DataGridView gridClientes;
+        private FontAwesome.Sharp.IconButton BtnAgregar;
     }
 }

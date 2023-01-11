@@ -43,12 +43,7 @@ namespace Desktop.Views
             GetAllClientes(txtBusqueda.Text);
         }
 
-        private void gridClientes_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void gridClientes_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
         {
             int iRow = e.RowIndex;
             int iColum = e.ColumnIndex;
@@ -66,7 +61,7 @@ namespace Desktop.Views
             }
         }
 
-        private void gridClientes_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void gridClientes_DataBindingComplete_1(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewColumn columna in gridClientes.Columns)
             {
@@ -76,14 +71,12 @@ namespace Desktop.Views
                     columna.Visible = false;
                 if (columna.Name == "Localidad")
                     columna.Visible = false;
-               if (columna.Name == "Telefono")
+                if (columna.Name == "Telefono")
                     columna.Visible = false;
-               if (columna.Name == "Email")
+                if (columna.Name == "Email")
                     columna.Visible = false;
-               if (columna.Name == "Dirección")
+                if (columna.Name == "Dirección")
                     columna.Visible = false;
-                //if (columna.Name == "Id")
-                //    columna.Width = 30;
             }
         }
     }
