@@ -49,7 +49,7 @@
             this.Menu.Name = "Menu";
             this.Menu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.Menu.ShowItemToolTips = true;
-            this.Menu.Size = new System.Drawing.Size(954, 66);
+            this.Menu.Size = new System.Drawing.Size(1075, 66);
             this.Menu.Stretch = false;
             this.Menu.TabIndex = 1;
             this.Menu.Text = "menuStrip1";
@@ -84,7 +84,7 @@
             // 
             // iconMenuItem3
             // 
-            this.iconMenuItem3.IconChar = FontAwesome.Sharp.IconChar.UserGroup;
+            this.iconMenuItem3.IconChar = FontAwesome.Sharp.IconChar.UserFriends;
             this.iconMenuItem3.IconColor = System.Drawing.Color.Black;
             this.iconMenuItem3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconMenuItem3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -103,7 +103,7 @@
             this.contenedor.BackColor = System.Drawing.Color.Gray;
             this.contenedor.Location = new System.Drawing.Point(0, 87);
             this.contenedor.Name = "contenedor";
-            this.contenedor.Size = new System.Drawing.Size(954, 380);
+            this.contenedor.Size = new System.Drawing.Size(1075, 570);
             this.contenedor.TabIndex = 2;
             // 
             // FrmPaginaPrincipal
@@ -111,10 +111,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(954, 465);
+            this.ClientSize = new System.Drawing.Size(1075, 655);
             this.Controls.Add(this.contenedor);
             this.Controls.Add(this.Menu);
             this.MainMenuStrip = this.Menu;
+            this.MinimumSize = new System.Drawing.Size(1091, 694);
             this.Name = "FrmPaginaPrincipal";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

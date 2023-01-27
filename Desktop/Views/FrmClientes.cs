@@ -25,6 +25,7 @@ namespace Desktop.Views
             InitializeComponent();
             unitOfWork = unitOfWork;
             //CargarComboLocalidades();
+            TabClientes.SelectedIndex = 1;
             
             GetAll();
             gridClientes.DataSource = listaClientes;
@@ -71,12 +72,6 @@ namespace Desktop.Views
             TxtEmail.Text = cliente.Email;
             TxtTelefono.Text = cliente.Telefono;
             TxtDireccion.Text = cliente.Dirección;
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LimpiarImputs();
-            Close();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -143,6 +138,17 @@ namespace Desktop.Views
         {
             FrmLocalidad frmLocalidad = new FrmLocalidad();
             frmLocalidad.ShowDialog();
+        }
+
+        private void Nuevo_Click(object sender, EventArgs e)
+        {
+            TabClientes.SelectedIndex = 0;
+        }
+
+        private void btnVerClientes_Click(object sender, EventArgs e)
+        {
+            LimpiarImputs();
+            TabClientes.SelectedIndex = 1;
         }
     }
 }

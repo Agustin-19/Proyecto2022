@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.InventarioTab = new System.Windows.Forms.TabPage();
             this.gridProductos = new System.Windows.Forms.DataGridView();
@@ -75,11 +76,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkOrange;
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.TabControl);
             this.panel1.Location = new System.Drawing.Point(1, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(595, 370);
             this.panel1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Location = new System.Drawing.Point(3, -1);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(589, 37);
+            this.panel2.TabIndex = 75;
             // 
             // TabControl
             // 
@@ -185,7 +196,7 @@
             this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.ForeColor = System.Drawing.Color.PaleTurquoise;
-            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.Search;
             this.btnBuscar.IconColor = System.Drawing.Color.PaleTurquoise;
             this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnBuscar.IconSize = 20;
@@ -242,7 +253,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Prestige Elite Std", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.ForeColor = System.Drawing.Color.NavajoWhite;
+            this.label9.ForeColor = System.Drawing.Color.Khaki;
             this.label9.Location = new System.Drawing.Point(137, 3);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(334, 31);
@@ -307,7 +318,7 @@
             this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.ForeColor = System.Drawing.Color.LightCoral;
-            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.TimesCircle;
+            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.XmarkCircle;
             this.btnCancelar.IconColor = System.Drawing.Color.LightCoral;
             this.btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCancelar.IconSize = 20;
@@ -512,5 +523,6 @@
         private NumericUpDown nudId;
         private FontAwesome.Sharp.IconButton btnBuscar;
         private DataGridView gridProductos;
+        private Panel panel2;
     }
 }

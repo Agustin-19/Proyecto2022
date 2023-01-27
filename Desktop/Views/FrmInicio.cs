@@ -475,5 +475,15 @@ namespace Desktop.Views
             }
             BtnImprimirBoleta.Enabled = false;
         }
+
+        private void BtnVerVentas_Click(object sender, EventArgs e)
+        {
+            TabVentaDetalle.SelectedIndex = 1;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            TabVentaDetalle.SelectedIndex = 0;
+        }
     }
 }

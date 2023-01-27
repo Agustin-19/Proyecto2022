@@ -34,8 +34,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.TabClientes = new System.Windows.Forms.TabControl();
             this.TabEditarClientes = new System.Windows.Forms.TabPage();
+            this.btnVerClientes = new FontAwesome.Sharp.IconButton();
             this.BtnAgregar = new FontAwesome.Sharp.IconButton();
             this.TxtEmail = new System.Windows.Forms.TextBox();
             this.TxtDireccion = new System.Windows.Forms.TextBox();
@@ -44,7 +46,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.nudId = new System.Windows.Forms.NumericUpDown();
-            this.btnCancelar = new FontAwesome.Sharp.IconButton();
             this.btnGuardar = new FontAwesome.Sharp.IconButton();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TabListadoCliente = new System.Windows.Forms.TabPage();
+            this.Nuevo = new FontAwesome.Sharp.IconButton();
             this.gridClientes = new System.Windows.Forms.DataGridView();
             this.BtnEliminar = new FontAwesome.Sharp.IconButton();
             this.BtnEditar = new FontAwesome.Sharp.IconButton();
@@ -78,11 +80,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkOrange;
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.TabClientes);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(786, 376);
             this.panel1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Location = new System.Drawing.Point(3, -1);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(770, 37);
+            this.panel2.TabIndex = 74;
             // 
             // TabClientes
             // 
@@ -101,6 +113,7 @@
             // TabEditarClientes
             // 
             this.TabEditarClientes.BackColor = System.Drawing.Color.DarkGray;
+            this.TabEditarClientes.Controls.Add(this.btnVerClientes);
             this.TabEditarClientes.Controls.Add(this.BtnAgregar);
             this.TabEditarClientes.Controls.Add(this.TxtEmail);
             this.TabEditarClientes.Controls.Add(this.TxtDireccion);
@@ -109,7 +122,6 @@
             this.TabEditarClientes.Controls.Add(this.label9);
             this.TabEditarClientes.Controls.Add(this.label8);
             this.TabEditarClientes.Controls.Add(this.nudId);
-            this.TabEditarClientes.Controls.Add(this.btnCancelar);
             this.TabEditarClientes.Controls.Add(this.btnGuardar);
             this.TabEditarClientes.Controls.Add(this.label7);
             this.TabEditarClientes.Controls.Add(this.label5);
@@ -128,6 +140,26 @@
             this.TabEditarClientes.Size = new System.Drawing.Size(753, 322);
             this.TabEditarClientes.TabIndex = 1;
             this.TabEditarClientes.Text = "Agregar Cliente";
+            // 
+            // btnVerClientes
+            // 
+            this.btnVerClientes.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnVerClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnVerClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerClientes.ForeColor = System.Drawing.Color.MediumTurquoise;
+            this.btnVerClientes.IconChar = FontAwesome.Sharp.IconChar.Search;
+            this.btnVerClientes.IconColor = System.Drawing.Color.MediumTurquoise;
+            this.btnVerClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnVerClientes.IconSize = 20;
+            this.btnVerClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerClientes.Location = new System.Drawing.Point(347, 285);
+            this.btnVerClientes.Name = "btnVerClientes";
+            this.btnVerClientes.Size = new System.Drawing.Size(117, 31);
+            this.btnVerClientes.TabIndex = 73;
+            this.btnVerClientes.Text = "Ver Clientes";
+            this.btnVerClientes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVerClientes.UseVisualStyleBackColor = false;
+            this.btnVerClientes.Click += new System.EventHandler(this.btnVerClientes_Click);
             // 
             // BtnAgregar
             // 
@@ -211,26 +243,6 @@
             this.nudId.Size = new System.Drawing.Size(119, 25);
             this.nudId.TabIndex = 68;
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.ForeColor = System.Drawing.Color.LightCoral;
-            this.btnCancelar.IconChar = FontAwesome.Sharp.IconChar.TimesCircle;
-            this.btnCancelar.IconColor = System.Drawing.Color.LightCoral;
-            this.btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCancelar.IconSize = 20;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(354, 285);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(91, 31);
-            this.btnCancelar.TabIndex = 67;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // btnGuardar
             // 
             this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -242,7 +254,7 @@
             this.btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnGuardar.IconSize = 20;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(244, 285);
+            this.btnGuardar.Location = new System.Drawing.Point(243, 285);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(89, 31);
             this.btnGuardar.TabIndex = 66;
@@ -348,6 +360,7 @@
             // TabListadoCliente
             // 
             this.TabListadoCliente.BackColor = System.Drawing.Color.DarkGray;
+            this.TabListadoCliente.Controls.Add(this.Nuevo);
             this.TabListadoCliente.Controls.Add(this.gridClientes);
             this.TabListadoCliente.Controls.Add(this.BtnEliminar);
             this.TabListadoCliente.Controls.Add(this.BtnEditar);
@@ -361,6 +374,26 @@
             this.TabListadoCliente.Size = new System.Drawing.Size(753, 322);
             this.TabListadoCliente.TabIndex = 0;
             this.TabListadoCliente.Text = "Listado Clientes";
+            // 
+            // Nuevo
+            // 
+            this.Nuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Nuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Nuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Nuevo.ForeColor = System.Drawing.Color.PaleGreen;
+            this.Nuevo.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.Nuevo.IconColor = System.Drawing.Color.PaleGreen;
+            this.Nuevo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.Nuevo.IconSize = 20;
+            this.Nuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Nuevo.Location = new System.Drawing.Point(659, 61);
+            this.Nuevo.Name = "Nuevo";
+            this.Nuevo.Size = new System.Drawing.Size(78, 33);
+            this.Nuevo.TabIndex = 49;
+            this.Nuevo.Text = "Nuevo";
+            this.Nuevo.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.Nuevo.UseVisualStyleBackColor = false;
+            this.Nuevo.Click += new System.EventHandler(this.Nuevo_Click);
             // 
             // gridClientes
             // 
@@ -424,7 +457,7 @@
             this.gridClientes.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.gridClientes.RowTemplate.Height = 25;
             this.gridClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridClientes.Size = new System.Drawing.Size(708, 216);
+            this.gridClientes.Size = new System.Drawing.Size(724, 216);
             this.gridClientes.TabIndex = 48;
             this.gridClientes.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gridClientes_DataBindingComplete_1);
             // 
@@ -439,7 +472,7 @@
             this.BtnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnEliminar.IconSize = 20;
             this.BtnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnEliminar.Location = new System.Drawing.Point(630, 61);
+            this.BtnEliminar.Location = new System.Drawing.Point(559, 61);
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(91, 33);
             this.BtnEliminar.TabIndex = 47;
@@ -459,7 +492,7 @@
             this.BtnEditar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnEditar.IconSize = 20;
             this.BtnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnEditar.Location = new System.Drawing.Point(553, 61);
+            this.BtnEditar.Location = new System.Drawing.Point(481, 61);
             this.BtnEditar.Name = "BtnEditar";
             this.BtnEditar.Size = new System.Drawing.Size(71, 33);
             this.BtnEditar.TabIndex = 46;
@@ -474,11 +507,11 @@
             this.BtnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BtnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBuscar.ForeColor = System.Drawing.Color.MediumTurquoise;
-            this.BtnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.BtnBuscar.IconChar = FontAwesome.Sharp.IconChar.Search;
             this.BtnBuscar.IconColor = System.Drawing.Color.MediumTurquoise;
             this.BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnBuscar.IconSize = 20;
-            this.BtnBuscar.Location = new System.Drawing.Point(455, 61);
+            this.BtnBuscar.Location = new System.Drawing.Point(439, 61);
             this.BtnBuscar.Name = "BtnBuscar";
             this.BtnBuscar.Size = new System.Drawing.Size(36, 33);
             this.BtnBuscar.TabIndex = 45;
@@ -510,7 +543,7 @@
             // 
             this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBusqueda.Location = new System.Drawing.Point(131, 69);
+            this.txtBusqueda.Location = new System.Drawing.Point(114, 66);
             this.txtBusqueda.Name = "txtBusqueda";
             this.txtBusqueda.Size = new System.Drawing.Size(318, 25);
             this.txtBusqueda.TabIndex = 37;
@@ -542,7 +575,6 @@
         private TabPage TabEditarClientes;
         private TabPage TabListadoCliente;
         private NumericUpDown nudId;
-        private FontAwesome.Sharp.IconButton btnCancelar;
         private FontAwesome.Sharp.IconButton btnGuardar;
         private Label label7;
         private Label label5;
@@ -568,5 +600,8 @@
         private TextBox txtBusqueda;
         private DataGridView gridClientes;
         private FontAwesome.Sharp.IconButton BtnAgregar;
+        private FontAwesome.Sharp.IconButton Nuevo;
+        private FontAwesome.Sharp.IconButton btnVerClientes;
+        private Panel panel2;
     }
 }
