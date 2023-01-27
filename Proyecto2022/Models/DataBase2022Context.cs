@@ -34,16 +34,17 @@ namespace Data.Models
                    errorNumbersToAdd: null));
 
 
-                //optionsBuilder.UseMySql("Server=localhost;Database=proyecto2022;user=root;password=;", ServerVersion.AutoDetect("Server=localhost;Database=proyecto2022;user=root;password=;"),
-                //     options => options.EnableRetryOnFailure(
-                //     maxRetryCount: 5,
-                //     maxRetryDelay: System.TimeSpan.FromSeconds(30),
-                //     errorNumbersToAdd: null));
+                //    optionsBuilder.UseMySql("Server=localhost;Database=proyecto2022;user=root;password=;", ServerVersion.AutoDetect("Server=localhost;Database=proyecto2022;user=root;password=;"),
+                //         options => options.EnableRetryOnFailure(
+                //         maxRetryCount: 5,
+                //         maxRetryDelay: System.TimeSpan.FromSeconds(30),
+                //         errorNumbersToAdd: null));
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
         }
     }
 }

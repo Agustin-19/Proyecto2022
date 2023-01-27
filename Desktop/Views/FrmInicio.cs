@@ -1,6 +1,7 @@
 ﻿using Data.Interfaces;
 using Data.Models;
 using Data.Repositories;
+using Desktop.ViewReports;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
@@ -294,21 +295,24 @@ namespace Desktop.Views
 
                 GridVentas.Refresh();
 
-                //if (OptnerIDVenta > 0)
-                //{
-                //    var result = MessageBox.Show("¿Desea imprimir comproante? ", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                //    if (result == DialogResult.Yes)
-                //    {
-                //        FrmVerVentas frmVerVentas = new FrmVerVentas();
-                //        frmVerVentas.ShowDialog();
-                //    }
-                //}
-                //MessageBox.Show("Venta Completada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (OptnerIDVenta > 0)
+            {
+                var result = MessageBox.Show("¿Desea imprimir comproante? ", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (result == DialogResult.Yes)
+                {
+                    IrAPestañaDetalles();
+                }
+            }
+            MessageBox.Show("Venta Completada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            
+
 
         }
 
+        private void IrAPestañaDetalles()
+        {
+            TabVentaDetalle.SelectedIndex = 1;
+        }
 
         private async Task GuardarVenta()
         {
@@ -354,11 +358,7 @@ namespace Desktop.Views
         // terminados los procesos de TabInicio...
 
         // Incio de procesos de TabVentas
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void GridVenta2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewColumn columna in GridVenta2.Columns)
@@ -429,6 +429,7 @@ namespace Desktop.Views
                 listaVentaDetalles.DataSource = await unitOfWork.VentaDetalleRepository.GetAllAsync(c => c.IdVenta == idVentaSeleccionada);
                 GridVentaDetalle.DataSource = listaVentaDetalles;
             }
+            BtnImprimirBoleta.Enabled = true;
         }
 
         private void GridVentaDetalle_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -459,6 +460,20 @@ namespace Desktop.Views
                     columna.HeaderText = "Fecha";
 
             }
+        }
+
+        private void BtnImprimirBoleta_Click(object sender, EventArgs e)
+        {
+            if (GridVenta2.Rows.Count > 0)
+            {
+                FrmBoleta frmBoleta = new FrmBoleta((int)GridVenta2.CurrentRow.Cells[0].Value);
+                frmBoleta.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No a seleccionado ninguna venta");
+            }
+            BtnImprimirBoleta.Enabled = false;
         }
     }
 }

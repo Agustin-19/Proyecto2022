@@ -193,6 +193,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmClienteView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmViewCliente";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
