@@ -11,6 +11,11 @@
   <ItemGroup>
     <None Remove="Paquetes\Microsoft.ReportViewer.Common.dll" />
     <None Remove="Paquetes\Microsoft.ReportViewer.WinForms.dll" />
+    <None Remove="Reports\RptBoleta.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\RptBoleta.rdlc" />
   </ItemGroup>
 
   <ItemGroup>

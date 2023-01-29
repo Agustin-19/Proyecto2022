@@ -28,8 +28,8 @@ namespace Desktop.Views
         {
             InitializeComponent();
             GetAll();
-            
-           
+
+            BtnImprimirBoleta.Enabled = false;
         }
 
         private async Task GetAll()
@@ -231,6 +231,7 @@ namespace Desktop.Views
             }
         }
 
+       
         private async void BtnCrearVenta_Click(object sender, EventArgs e)
         {
             // asegurar que se ingrese un cliente. Por defecto esta Seleccionado "consumidor final" 
@@ -262,6 +263,7 @@ namespace Desktop.Views
 
             int OptnerIDVenta = GridVenta1.RowCount + 1;
             await GetAll();
+           
 
             //el foreach recorre el DataGridView para optener los datos de los productos.
             foreach (DataGridViewRow row in GridVentas.Rows)
@@ -316,13 +318,14 @@ namespace Desktop.Views
 
         private async Task GuardarVenta()
         {
-            int OptnerIDVenta = GridVenta1.RowCount + 1;
+            int numeroVenta = GridVenta1.RowCount + 1;
+            
 
             Venta venta = new Venta()
             {
                 IdCliente = Convert.ToInt32(TxtIdCliente.Text),
                 DNICliente = Convert.ToInt32(NudDNI.Value),
-                NumeroVenta = OptnerIDVenta.ToString(),
+                NumeroVenta = numeroVenta.ToString(),
                 NombreCliente = TxtNombre.Text,
                 MontoPago = Convert.ToDecimal(TxtPaga.Text),
                 MontoTotal = Convert.ToDecimal(TxtTotal.Text),
@@ -416,7 +419,6 @@ namespace Desktop.Views
             }
         }
 
-
         private async void GridVenta2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (GridVenta2.Rows.Count > 0)
@@ -466,7 +468,7 @@ namespace Desktop.Views
         {
             if (GridVenta2.Rows.Count > 0)
             {
-                FrmBoleta frmBoleta = new FrmBoleta((int)GridVenta2.CurrentRow.Cells[0].Value);
+                FrmBoleta frmBoleta = new FrmBoleta((int)GridVenta2.CurrentRow.Cells["Id"].Value);
                 frmBoleta.ShowDialog();
             }
             else

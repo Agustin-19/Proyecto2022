@@ -28,6 +28,11 @@ namespace Desktop.ViewReports
             InitializeComponent();
 
             ventaSeleccionada = IdVenta;
+            reporte.Dock = DockStyle.Fill;
+            reporte.SetDisplayMode(DisplayMode.PrintLayout);
+            reporte.ZoomMode = ZoomMode.Percent;
+            reporte.ZoomPercent = 100;
+            Controls.Add(reporte);
         }
 
        
@@ -39,13 +44,11 @@ namespace Desktop.ViewReports
 
 
                 reporte.LocalReport.ReportEmbeddedResource = "Desktop.Reports.RptBoleta.rdlc";
-                var ventaDetalle = await unitOfWork.VentaDetalleRepository.GetAllAsync();
-                var Venta = await unitOfWork.VentaRepository.GetAllAsync();
+                var ventaDetalle = await unitOfWork.VentaDetalleRepository.GetAllAsync(
+                    filter:d => d.IdVenta==ventaSeleccionada);
 
                 var ventas = from VentaDetalle detalleDeVenta in ventaDetalle
-                             join venta in Venta
-                             on detalleDeVenta.IdVenta equals venta.Id
-                             where detalleDeVenta.IdVenta == ventaSeleccionada
+                             
                              select new
                              {
                                  //Datos detalle de venta
@@ -64,7 +67,7 @@ namespace Desktop.ViewReports
                                  MontoCambio = detalleDeVenta.MontoCambio,
                                  FechaRegistro = detalleDeVenta.FechaRegistro
                              };
-                reporte.LocalReport.DataSources.Add(new ReportDataSource("DSVentaDetalle", ventas));
+                reporte.LocalReport.DataSources.Add(new ReportDataSource("DataSetReportes", ventas));
 
                 reporte.RefreshReport();
             }
