@@ -30,6 +30,7 @@ namespace Desktop.Views
             GetAll();
 
             BtnImprimirBoleta.Enabled = false;
+            BtnTicket.Enabled = false;
         }
 
         private async Task GetAll()
@@ -61,10 +62,7 @@ namespace Desktop.Views
             TxtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             LimpiarProducto();
             LimpiarCliente();
-            NudCantidad.Value = 1;
-
         }
-
 
         private void LimpiarProducto()
         {
@@ -75,11 +73,12 @@ namespace Desktop.Views
             NudCantidad.Value = 1;
             BtnAgregar.Enabled = false;
         }
+
         private void LimpiarCliente()
         {
             TxtIdCliente.Text = "0";
             TxtNombre.Text = "Consumidor Final";
-            NudDNI.Value = 11111;
+            NudDNI.Value = 00000000;
             TxtPaga.Text = "";
             TxtCambio.Text = "0,00";
             TxtTotal.Text = "0,00";
@@ -151,6 +150,36 @@ namespace Desktop.Views
             TxtProducto.Select();
         }
 
+        private void GridVentas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+            if (e.ColumnIndex == 5)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                var w = Properties.Resources.eliminarUno.Width;
+                var h = Properties.Resources.eliminarUno.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(Properties.Resources.eliminarUno, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
+
+        private void GridVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (GridVentas.Columns[e.ColumnIndex].Name == "elimina")
+            {
+                int index = e.RowIndex;
+                if (index >= 0)
+                {
+                    GridVentas.Rows.RemoveAt(index);
+                    CalcularTotal();
+                }
+            }
+        }
 
         // calcular el total sumando los valores en la celda SubTotal
         private void CalcularTotal()
@@ -231,7 +260,6 @@ namespace Desktop.Views
             }
         }
 
-       
         private async void BtnCrearVenta_Click(object sender, EventArgs e)
         {
             // asegurar que se ingrese un cliente. Por defecto esta Seleccionado "consumidor final" 
@@ -299,21 +327,21 @@ namespace Desktop.Views
 
             if (OptnerIDVenta > 0)
             {
-                var result = MessageBox.Show("¿Desea imprimir comproante? ", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                var result = MessageBox.Show("¿Desea imprimir el Ticket? ", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (result == DialogResult.Yes)
                 {
-                    IrAPestañaDetalles();
+
+                    if (GridVenta2.Rows.Count > 0)
+                    {
+                        FrmTicket frmTicket = new FrmTicket((int)GridVenta2.CurrentRow.Cells["Id"].Value);
+                        frmTicket.ShowDialog();
+                    }
                 }
             }
             MessageBox.Show("Venta Completada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
 
 
-        }
-
-        private void IrAPestañaDetalles()
-        {
-            TabVentaDetalle.SelectedIndex = 1;
         }
 
         private async Task GuardarVenta()
@@ -357,11 +385,15 @@ namespace Desktop.Views
             }
         }
 
-       
+        private void BtnVerVentas_Click(object sender, EventArgs e)
+        {
+            TabVentaDetalle.SelectedIndex = 1;
+        }
+
         // terminados los procesos de TabInicio...
 
         // Incio de procesos de TabVentas
-       
+
         private void GridVenta2_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewColumn columna in GridVenta2.Columns)
@@ -387,38 +419,7 @@ namespace Desktop.Views
 
             }
         }
-
-        private void GridVentas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.RowIndex < 0)
-                return;
-            if (e.ColumnIndex == 5)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                var w = Properties.Resources.eliminarUno.Width;
-                var h = Properties.Resources.eliminarUno.Height;
-                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
-
-                e.Graphics.DrawImage(Properties.Resources.eliminarUno, new Rectangle(x, y, w, h));
-                e.Handled = true;
-            }
-        }
-
-        private void GridVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (GridVentas.Columns[e.ColumnIndex].Name == "elimina")
-            {
-                int index = e.RowIndex;
-                if (index >= 0)
-                {
-                    GridVentas.Rows.RemoveAt(index);
-                    CalcularTotal();
-                }
-            }
-        }
-
+              
         private async void GridVenta2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (GridVenta2.Rows.Count > 0)
@@ -432,6 +433,7 @@ namespace Desktop.Views
                 GridVentaDetalle.DataSource = listaVentaDetalles;
             }
             BtnImprimirBoleta.Enabled = true;
+            BtnTicket.Enabled = true;
         }
 
         private void GridVentaDetalle_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -464,6 +466,11 @@ namespace Desktop.Views
             }
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            TabVentaDetalle.SelectedIndex = 0;
+        }
+
         private void BtnImprimirBoleta_Click(object sender, EventArgs e)
         {
             if (GridVenta2.Rows.Count > 0)
@@ -478,14 +485,19 @@ namespace Desktop.Views
             BtnImprimirBoleta.Enabled = false;
         }
 
-        private void BtnVerVentas_Click(object sender, EventArgs e)
+        private void BtnTicket_Click(object sender, EventArgs e)
         {
-            TabVentaDetalle.SelectedIndex = 1;
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            TabVentaDetalle.SelectedIndex = 0;
+            if (GridVenta2.Rows.Count > 0)
+            {
+                FrmTicket frmTicket = new FrmTicket((int)GridVenta2.CurrentRow.Cells["Id"].Value);
+                frmTicket.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No a seleccionado ninguna venta");
+            }
+            BtnImprimirBoleta.Enabled = false;
+            BtnTicket.Enabled = false;
         }
     }
 }

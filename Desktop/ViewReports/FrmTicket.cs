@@ -5,15 +5,12 @@ using System.Data;
 
 namespace Desktop.ViewReports
 {
-    public partial class FrmBoleta : Form
+    public partial class FrmTicket : Form
     {
-
         ReportViewer reporte = new ReportViewer();
         UnitOfWork unitOfWork = new UnitOfWork();
         int ventaSeleccionada;
-       
-
-        public FrmBoleta(int IdVenta)
+        public FrmTicket(int IdVenta)
         {
             InitializeComponent();
 
@@ -24,20 +21,19 @@ namespace Desktop.ViewReports
             reporte.ZoomPercent = 100;
             Controls.Add(reporte);
         }
-
        
 
-        private async void FrmBoleta_Load(object sender, EventArgs e)
+        private async void FrmTicket_Load(object sender, EventArgs e)
         {
             if (ventaSeleccionada > 0)
             {
 
-                reporte.LocalReport.ReportEmbeddedResource = "Desktop.Reports.RptBoleta.rdlc";
+                reporte.LocalReport.ReportEmbeddedResource = "Desktop.Reports.Ticket.rdlc";
                 var ventaDetalle = await unitOfWork.VentaDetalleRepository.GetAllAsync(
                     filter:d => d.IdVenta==ventaSeleccionada);
 
                 var ventas = from VentaDetalle detalleDeVenta in ventaDetalle
-                             
+
                              select new
                              {
                                  //Datos detalle de venta

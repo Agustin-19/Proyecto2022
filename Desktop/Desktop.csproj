@@ -12,10 +12,14 @@
     <None Remove="Paquetes\Microsoft.ReportViewer.Common.dll" />
     <None Remove="Paquetes\Microsoft.ReportViewer.WinForms.dll" />
     <None Remove="Reports\RptBoleta.rdlc" />
+    <None Remove="Reports\Ticket.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Reports\RptBoleta.rdlc" />
+    <EmbeddedResource Include="Reports\Ticket.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
