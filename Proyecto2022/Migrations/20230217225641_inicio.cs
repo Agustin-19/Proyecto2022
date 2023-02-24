@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -63,11 +62,11 @@ namespace Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Marca = table.Column<string>(type: "longtext", nullable: true)
+                    Marca = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Detalle = table.Column<string>(type: "longtext", nullable: true)
+                    Detalle = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Precio = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
@@ -90,7 +89,8 @@ namespace Data.Migrations
                     PrecioVenta = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    FechaRegistro = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     NombreCliente = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DNICliente = table.Column<int>(type: "int", nullable: false),
@@ -110,15 +110,14 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NumeroVenta = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumeroVenta = table.Column<int>(type: "int", nullable: false),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     NombreCliente = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DNICliente = table.Column<int>(type: "int", nullable: false),
+                    MontoTotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MontoPago = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MontoCambio = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    MontoTotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     FechaRegistro = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },

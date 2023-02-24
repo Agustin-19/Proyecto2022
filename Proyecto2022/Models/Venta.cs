@@ -10,7 +10,7 @@ namespace Data.Models
     public class Venta
     {
         public int Id { get; set; }
-        public string? NumeroVenta { get; set; }
+        public int NumeroVenta { get; set; }
         [Required]
         public int IdCliente { get; set; }
         [Required]

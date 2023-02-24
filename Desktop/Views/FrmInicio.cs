@@ -353,7 +353,7 @@ namespace Desktop.Views
             {
                 IdCliente = Convert.ToInt32(TxtIdCliente.Text),
                 DNICliente = Convert.ToInt32(NudDNI.Value),
-                NumeroVenta = numeroVenta.ToString(),
+                NumeroVenta = numeroVenta,
                 NombreCliente = TxtNombre.Text,
                 MontoPago = Convert.ToDecimal(TxtPaga.Text),
                 MontoTotal = Convert.ToDecimal(TxtTotal.Text),
